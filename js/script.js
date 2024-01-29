@@ -84,7 +84,7 @@ const swiper = new Swiper('.partners-swipers', {
 });
 
 const swiperEvents = new Swiper('.events-swipers', {
-  loop: true,
+  // loop: true,
   slidesPerView: "auto",
   spaceBetween: 15,
 
