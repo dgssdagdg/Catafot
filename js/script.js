@@ -26,6 +26,11 @@ document.addEventListener('click', function(e) {
       event.classList.remove('events-view-active')
     }
 
+    if(e.target.closest('.intro-block-close')) {
+      let block = e.target.closest('.intro-block');
+      block.style.display="none";
+    }
+
 })
 
 window.onscroll = function(){
