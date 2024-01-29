@@ -56,11 +56,14 @@ function up() {
 	return false;
 }
 
-const swiper = new Swiper('.partners-swipers', {
+// import Swiper from 'swiper';
+// import { Navigation, Pagination } from 'swiper/modules';
+
+
+const swiperPartners = new Swiper('.partners-swipers', {
     loop: true,
     slidesPerView: 4,
     spaceBetween: 30,
-  
     // Navigation arrows
     navigation: {
       nextEl: '.partners-button-next',
@@ -87,5 +90,4 @@ const swiperEvents = new Swiper('.events-swipers', {
   // loop: true,
   slidesPerView: "auto",
   spaceBetween: 15,
-
 });
