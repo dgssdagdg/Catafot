@@ -2,17 +2,17 @@ document.addEventListener('click', function(e) {
     let menuBtn = document.querySelector('.menu-btn');
     let menu = document.querySelector('.menu');
     let header = document.querySelector('.header');
-    let body = document.body
+    const html = document.documentElement;
     if(e.target.closest('.menu-btn')) {
         menuBtn.classList.toggle('active');
         menu.classList.toggle('active');
         header.classList.toggle('header-active')
-        body.classList.toggle('_overflow')
+        html.classList.toggle('_overflow')
     } else if (menu.closest('.active') && !e.target.closest('.menu') && menuBtn.closest('.active')) {
         menuBtn.classList.remove('active');
         menu.classList.remove('active');
         header.classList.remove('header-active')
-        body.classList.remove('_overflow')
+        html.classList.remove('_overflow')
     }
 
     if(e.target.closest('.events-view')) {
@@ -31,9 +31,14 @@ document.addEventListener('click', function(e) {
 window.onscroll = function(){
   const html = document.documentElement, body = document.body;
   const wrapper = document.querySelector('.wrapper')
+  const header = document.querySelector(".header")
   if(html.scrollTop>100||body.scrollTop>100) {
-    wrapper.classList.add('wrapper-active')
-  } else wrapper.classList.remove('wrapper-active')
+    wrapper.classList.add('wrapper-active');
+    header.classList.add('header-fixed');
+  } else{
+    wrapper.classList.remove('wrapper-active')
+    header.classList.remove('header-fixed');
+  }
 }
 
 var t;

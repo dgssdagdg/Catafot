@@ -70,6 +70,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: inherit;
 }
 
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
 body {
   font-family: "Ysabeau Office", sans-serif;
   font-weight: 300;
@@ -77,11 +82,6 @@ body {
 
 ._overflow {
   overflow: hidden;
-}
-._overflow .wrapper {
-  height: 100%;
-  position: relative;
-  overflow: auto;
 }
 
 ._title {
@@ -207,16 +207,21 @@ body {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+.wrapper-active .main {
+  margin-top: 96px;
+}
 
 .header {
   width: 100%;
   height: 96px;
-  border-color: #FFFFFF;
+  background-color: #FFFFFF;
   padding: 12px 0;
   -webkit-transition: all 0.8s ease;
   transition: all 0.8s ease;
   position: relative;
   z-index: 6;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 .header-active {
@@ -229,6 +234,14 @@ body {
   opacity: 0;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
+}
+
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
 
 .blue,
