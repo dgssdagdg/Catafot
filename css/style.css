@@ -953,15 +953,17 @@ body {
      -moz-column-gap: 30px;
           column-gap: 30px;
   row-gap: 40px;
-  display: none;
+  display: -ms-grid !important;
+  display: grid !important;
   -ms-grid-columns: 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr 30px 1fr;
   grid-template-columns: repeat(12, 1fr);
   justify-items: center;
 }
 
 .events-items-active {
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .events-item {
@@ -1059,6 +1061,37 @@ body {
   font-size: 17px;
 }
 
+.events-swipers {
+  width: 100%;
+  display: none;
+}
+.events-swipers .swiper-slide {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+}
+.events-swipers .swiper-slide-active {
+  opacity: 1;
+  visibility: visible;
+}
+.events-swipers .swiper-slide-active + .swiper-slide {
+  opacity: 1;
+  visibility: visible;
+}
+.events-swipers .swiper-slide {
+  height: 326px;
+  width: 250px;
+}
+.events-swipers .events-item {
+  height: 326px;
+  width: 250px;
+}
+
+.events-items-blocks {
+  display: none;
+}
+
 @media (max-width: 998px) {
   .events-items {
     -ms-grid-columns: (1fr)[8];
@@ -1066,6 +1099,14 @@ body {
   }
 }
 @media (max-width: 767px) {
+  .events-items-blocks .events-items {
+    display: none !important;
+  }
+  .events-items-blocks .events-swipers {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   .events {
     padding: 50px 0;
   }
@@ -1099,21 +1140,10 @@ body {
     padding: 11px 20px 15px;
     font-size: 18px;
   }
-  .events-items {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-column-gap: 15px;
-       -moz-column-gap: 15px;
-            column-gap: 15px;
-  }
   .events-items-active {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-  }
-  .events-item {
-    min-width: 250px;
-    height: 326px;
   }
   .events-item-title {
     font-size: 19px;

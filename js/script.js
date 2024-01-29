@@ -81,4 +81,11 @@ const swiper = new Swiper('.partners-swipers', {
           slidesPerView: 4,
         }
       }
-  });
+});
+
+const swiperEvents = new Swiper('.events-swipers', {
+  loop: true,
+  slidesPerView: "auto",
+  spaceBetween: 15,
+
+});
