@@ -132,7 +132,7 @@ document.addEventListener('click', function(e) {
 
 //Получение масива json и дальнейший перенос в html---------------------------------------------
 let pageItems = document.querySelector('.reviews-items');
-const requestURL ="../json/rewies.json"
+const requestURL ="/Catafot/json/rewies.json"
 const request = new XMLHttpRequest();
 request.open("GET", requestURL);
 request.responseType = "json";
