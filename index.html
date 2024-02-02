@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mary's simple recipe for maple bacon donuts makes a sticky, sweet treat with just a hint of salt that you'll keep coming back for.">
-    <link rel="stylesheet" href="./node_modules/swiper/swiper-bundle.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> -->
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.15/build/css/intlTelInput.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="header-right-buttons df-align">
                             <button type="button" class="header-right-btn btn blue">Забронировать</button>
-                            <button type="button" class="header-right-btn btn orange">Заказать звонок</button>
+                            <button data-id="order-tell" type="button" class="header-right-btn btn orange pop-open-btn">Заказать звонок</button>
                         </div>
                     </div>
                 </div>
@@ -188,7 +188,7 @@
                                 ул. Интернациональная 106, 306
                             </div>
                         </div>
-                        <button type="button" class="header-right-btn btn orange">Заказать звонок</button>
+                        <button data-id="order-tell" type="button" class="header-right-btn btn orange pop-open-btn">Заказать звонок</button>
                         <div class="menu-block-btn">
                             <div class="menu-block-btn-title">Готовы к бронированию чего-нибудь?</div>
                             <button class="menu-block-btn-button btn">Забронировать</button>
@@ -206,6 +206,30 @@
                 <path d="M9.28571 33.4705L1.57143 33.4705C1.5 33.4705 1.35714 33.4705 1.28572 33.3905L1.21428 33.3905C1.14286 33.3905 1.07143 33.3106 1 33.3106C0.928572 33.3106 0.857143 33.2307 0.857143 33.1507C0.785713 33.0708 0.785713 33.0708 0.714285 32.9909C0.642857 32.911 0.642857 32.831 0.571428 32.7511C0.571428 32.6712 0.5 32.5913 0.5 32.5113C0.5 32.5113 0.5 32.5113 0.5 32.4314C0.5 32.3515 0.5 32.3515 0.5 32.2715L0.5 32.1916C0.5 32.1916 0.5 32.1916 0.5 32.1117C0.5 32.0318 0.5 31.9518 0.5 31.792C0.5 31.7121 0.571428 31.5522 0.642857 31.4723L6.21429 21.0817L10 14.0481C10.0714 13.8882 10.2143 13.7283 10.4286 13.5685C10.5 13.5685 10.5 13.4886 10.5714 13.4886L10.6429 13.4886C10.7143 13.4886 10.7143 13.4886 10.7857 13.4886L10.8571 13.4886C10.9286 13.4886 10.9286 13.4886 11 13.4886C11.0714 13.4886 11.0714 13.4886 11.1429 13.4886L11.2143 13.4886C11.2857 13.4886 11.2857 13.4886 11.3571 13.4886L11.4286 13.4886C11.5 13.4886 11.5714 13.5685 11.5714 13.5685C11.7143 13.6484 11.8571 13.8083 12 14.0481L15.7857 21.0817L21.3571 31.4723C21.4286 31.5522 21.4286 31.7121 21.5 31.792C21.5 31.8719 21.5 31.9518 21.5 32.1117C21.5 32.1117 21.5 32.1117 21.5 32.1916L21.5 32.2715C21.5 32.3515 21.5 32.3515 21.5 32.4314C21.5 32.4314 21.5 32.4314 21.5 32.5113C21.5 32.5913 21.4286 32.6712 21.4286 32.7511C21.4286 32.831 21.3571 32.911 21.2857 32.9909C21.2143 33.0708 21.2143 33.1507 21.1429 33.1507C21.0714 33.2307 21.0714 33.2307 21 33.3106C20.9286 33.3905 20.8571 33.3905 20.7857 33.3905L20.7143 33.3905C20.6429 33.3905 20.5 33.4705 20.4286 33.4705L12.7143 33.4705L9.28571 33.4705ZM10.7857 17.405C10.7857 17.405 10.7143 17.405 10.7143 17.4849L3.85714 30.2734C3.85714 30.3533 3.85714 30.3533 3.85714 30.4332C3.85714 30.4332 3.85714 30.4332 3.85714 30.5131C3.85714 30.5931 3.92857 30.5931 3.92857 30.5931L4 30.673L17.7143 30.673C17.7857 30.673 17.7857 30.673 17.7857 30.5931L17.8571 30.5131C17.8571 30.5131 17.8571 30.5131 17.8571 30.4332C17.8571 30.3533 17.8571 30.3533 17.8571 30.2734L11 17.4849L10.9286 17.405L10.8571 17.405L10.7857 17.405Z" fill="#EEEADE" stroke="#EEEADE" stroke-width="0.5"/>
                 </svg>
                 
+        </div>
+        <div id="order-tell" class="pop-up">
+            <div class="pop-up-closes">
+                <div class="pop-up-close">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32.3248" height="3.03045" transform="matrix(0.707107 0.707106 -0.707107 0.707106 2.14282 0)" fill="#1C9197"/>
+                        <rect width="32.3248" height="3.03045" transform="matrix(0.707107 -0.707106 0.707107 0.707106 0 22.8572)" fill="#1C9197"/>
+                        </svg>
+                        
+                </div>
+            </div>
+            <form action="#" class="pop-up-from pop-up-not-toch">
+                <div class="pop-up-from-title">Обратный звонок</div>
+                <div class="pop-up-from-text">Отправьте ваш запрос, и мы свяжемся с вами в ближайшее время</div>
+                <div class="pop-up-from-inputs">
+                    <input placeholder="Ваше имя" type="text" class="pop-up-from-input _input">
+                    <input id="phone" type="text" class="pop-up-from-input _input">
+                </div>
+                <div class="pop-up-from-checkbox">
+                    <input type="checkbox" id="checkbox-id"/>
+                    <label for="checkbox-id">Нажимая на кнопку «Отправить», вы даете согласие на обработку персональных данных и соглашаетесь с Политикой конфиденциальности.</label>
+                </div>
+                <button type="submit" class="pop-up-from-btn _btn-two blue">Отправить</button>
+            </form>
         </div>
         <main class="main">
             <section class="intro">
@@ -925,9 +949,51 @@
             
         </footer>
     </div>
-    <script src="./node_modules/swiper/swiper-bundle.min.js"></script>
-<!-- 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
+
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.15/build/js/intlTelInput.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('click', function(e) {
+            //Закрытия блока на главном экране на главном сайте------------------------------------------------
+            if(e.target.closest('.intro-block-close')) {
+                let block = e.target.closest('.intro-block');
+                block.style.display="none";
+            }
+        });
+        const swiper = new Swiper('.partners-swipers', {
+            loop: true,
+            slidesPerView: 4,
+            spaceBetween: 30,
+        
+            // Navigation arrows
+            navigation: {
+            nextEl: '.partners-button-next',
+            prevEl: '.partners-button-prev',
+            },
+
+            breakpoints: {
+
+                320: {
+                slidesPerView: 'auto',
+                spaceBetween: 15
+                },
+                767: {
+                slidesPerView: 3,
+                spaceBetween: 30
+                },
+                998: {
+                slidesPerView: 4,
+                }
+            }
+        });
+
+        const swiperEvents = new Swiper('.events-swipers', {
+        // loop: true,
+        slidesPerView: "auto",
+        spaceBetween: 15,
+
+        });
+    </script>
     <script src="./js/script.js"></script>
 </body>
 </html>
