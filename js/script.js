@@ -127,7 +127,7 @@ let navFive = document.querySelector('.navigation-page-five')
 let navEnd = document.querySelector('.navigation-page-end')
 let typesMedia = 'true';
 function myFunction(x) {
-  if (x.matches) {
+  if (x.matches && parent) {
     typesMedia = 'false'
     parent.removeChild(navOne)
     parent.removeChild(navFive)
@@ -151,80 +151,7 @@ x.addListener(myFunction)
 
 //Получение масива json и дальнейший перенос в html---------------------------------------------
 let pageItems = document.querySelector('.reviews-items');
-const requestURL ="/Catafot/json/rewies.json"
-const request = new XMLHttpRequest();
-request.open("GET", requestURL);
-request.responseType = "json";
-request.send();
-request.onload = function () {
-  const superHeroes = request.response;
-  addToReviews(superHeroes.slice(0, 4));
-};
 let reviewsItems = document.querySelector('.reviews-items')
-function addToReviewsCreate(items, json) {
-  let pageItemsDataOne = (items.dataset.page * 4 - 4);
-  let pageItemsDataTwo = (items.dataset.page * 4);
-  pageItems.innerHTML = ''
-  if(items.dataset.page == 1) {
-    addToReviews(json.slice(0, 4));
-  } else addToReviews(json.slice(pageItemsDataOne, pageItemsDataTwo));
-}
-function addToReviews(jsonObj) {
-  jsonObj.forEach(element => {
-    reviewsItems.insertAdjacentHTML(
-      'beforeend',
-      `
-      <div id="${element.id}" class="reviews-item">
-        <div class="reviews-item-block df-align">
-            <div class="reviews-item-name _title-sub">${element.name}</div>
-            <div class="reviews-item-date">${element.date}</div>
-        </div>
-        <div class="reviews-item-block df-align">
-            <div class="reviews-item-stars df-align">
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${element.stars >= 1 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${element.stars >= 2 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${element.stars >= 3 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${element.stars >= 4 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${element.stars >= 5 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-            </div>
-            <div class="reviews-item-title">${element.title}</div>
-        </div>
-        <div class="reviews-item-text">
-        ${element.description}
-        </div>
-        <img onclick="openTextHeigth(this)" src="./img/reviews/text-bg.png" alt="Bg" class="reviews-item-text-bg">
-        <div class="reviews-item-text-bg-open">...</div>
-        <img src="./img/reviews/item-img.jpg" alt="${element.title}" class="reviews-item-img">
-    </div>
-      `
-    );
-  });
-}
 
 //Создание Нумерованой погинации------------------------------------------------------------------------
 const pageNavLinks = document.querySelectorAll('.navigation-page');
@@ -232,8 +159,7 @@ let pageEnd = document.querySelector('.navigation-page-end')
 let pageEndTwo = document.querySelector('.navigation-page-end-min')
 let pageCenter = document.querySelector('.navigation-page-center')
 function pageUpdate(pageNumber) {
-  const jsonArry = request.response;
-  const maxPages = jsonArry.length / 4
+  const maxPages = 10;
   let pageActive = document.querySelector(".navigation-page-active");
   let pageNumberNum = pageNumber.dataset.pagenumber;
   if (pageActive) {
@@ -249,14 +175,14 @@ function pageUpdate(pageNumber) {
   } else if (pageNumber.closest(".navigation-page-one")) {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
-    addToReviewsCreate(pageItems, jsonArry)
+    // addToReviewsCreate(pageItems, jsonArry)
   }
 
   //Center-------------------------------------------
   if (pageNumber.closest(".navigation-page-center")) {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
-    addToReviewsCreate(pageItems, jsonArry)
+    // addToReviewsCreate(pageItems, jsonArry)
   }
 
   //Two-------------------------------------------
@@ -266,7 +192,7 @@ function pageUpdate(pageNumber) {
   } else if (pageNumber.closest(".navigation-page-two") || pageNumber.closest(".navigation-page-two-min" && typesMedia == 'false')) {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
-    addToReviewsCreate(pageItems, jsonArry)
+    // addToReviewsCreate(pageItems, jsonArry)
   }
 
   //Four-Two-------------------------------------------
@@ -277,7 +203,7 @@ function pageUpdate(pageNumber) {
   } else if (pageNumber.closest(".navigation-page-four") || pageNumber.closest(".navigation-page-four-min") && typesMedia == 'false') {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
-    addToReviewsCreate(pageItems, jsonArry)
+    // addToReviewsCreate(pageItems, jsonArry)
   }
 
   //Five-Two-------------------------------------------
@@ -290,7 +216,7 @@ function pageUpdate(pageNumber) {
   } else if (pageNumber.closest(".navigation-page-five")) {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
-    addToReviewsCreate(pageItems, jsonArry)
+    // addToReviewsCreate(pageItems, jsonArry)
   }
 
   //End-Five-Four-Three-------------------------------------------
@@ -307,11 +233,9 @@ function pageUpdate(pageNumber) {
 }
 //Обновляет коментарии и навигацию--------------------------------
 function pageUpdateNav(page, number, type) {
-  const jsonArry = request.response;
-  const maxPages = jsonArry.length / 4
+  const maxPages = 10;
   const dataActive = document.querySelector(`.navigation-page[data-pagenumber="${page - 1}"]`);
   const dataActivePrev = document.querySelector(`.navigation-page[data-pagenumber="${+page + 1}"]`);
-  addToReviewsCreate(pageItems, jsonArry)
   pageNavLinks.forEach(element => {
     let pageElement = element.dataset.pagenumber
     if (type == 1) {
@@ -331,7 +255,6 @@ function pageUpdateNav(page, number, type) {
     if(type == 2 && maxPages >= +page + number + 4 && !element.closest('.navigation-page-end')) {
       element.dataset.pagenumber = +pageElement + number;
       element.textContent=`${element.dataset.pagenumber}`
-      console.log(+page + number + 4);
     } else if (type == 2) {
       let pageEndElement = document.querySelector('.navigation-page-end')
       dataActive.classList.add('navigation-page-active')
@@ -459,7 +382,6 @@ function pagePrev() {
   const pageOne = document.querySelector(".navigation-page-one")
   const pageTwo = document.querySelector(".navigation-page-two-min")
   const pageActive = document.querySelector(".navigation-page-active");
-  const jsonArry = request.response;
   if (pageOne && pageOne.closest('.navigation-page-active') && pageOne.dataset.pagenumber != 1 ||
      pageTwo && pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1 && typesMedia == 'false')  {
       const pageNumberNum = pageActive.dataset.pagenumber;
@@ -473,7 +395,6 @@ function pagePrev() {
       const pageNumberNum = pagePrevActive.dataset.pagenumber
       pageItems.dataset.page = pageNumberNum
       pagePrevActive.classList.add('navigation-page-active')
-      addToReviewsCreate(pageItems, jsonArry)
   } else if (pageOne && !pageOne.closest('.navigation-page-active') && pageOne.dataset.pagenumber != 1 ||
     pageTwo && !pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1 && typesMedia == 'false') {
       if(pageActive.dataset.pagenumber - 1 > 0) {
@@ -486,8 +407,7 @@ function pagePrev() {
 
 }
 function pageNext() {
-  const jsonArry = request.response;
-  const maxPages = jsonArry.length / 4
+  const maxPages = 10;
   let pageActive = document.querySelector(".navigation-page-active");
   let pageFive = document.querySelector('.navigation-page-five')
   let pageFour = document.querySelector('.navigation-page-four-min')
@@ -505,7 +425,6 @@ function pageNext() {
       let pageNumberNum = pagePrevActive.dataset.pagenumber
       pageItems.dataset.page = pageNumberNum
       pagePrevActive.classList.add('navigation-page-active')
-      addToReviewsCreate(pageItems, jsonArry)
   } else if (pageFive && !pageEndClick.closest('.navigation-page-active') && +pageFive.dataset.pagenumber + 1 != maxPages ||
     pageFour && !pageEndClick.closest('.navigation-page-active') && +pageFour.dataset.pagenumber + 1 != maxPages && typesMedia == 'false') {
       if(+pageActive.dataset.pagenumber + 1 < maxPages) {
@@ -518,98 +437,6 @@ function pageNext() {
 }
 //-----------------------------------------------------------------------------------------------------------
 
-//Создание Коментария-----------------------------------------------------------
-const formElement = document.getElementById('form1');
-const formElements = document.querySelectorAll('.form-cheked')
-formElement.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = new FormData(formElement);
-  const fullName = formData.get('fullname');
-  const shiftName = formData.get('shiftname');
-  const description = formData.get('description');
-  const date = formData.get('date');
-  const re = /\s*-\s*/;
-  const nameList = date.split(re); 
-  const monthArry = {
-    1: 'Январь',
-    2: 'Февраль',
-    3: 'Март',
-    4: 'Апрель',
-    5: 'Май',
-    6: 'Июнь',
-    7: 'Июль',
-    8: 'Август',
-    9: 'Сентябрь',
-    10: 'Октябрь',
-    11: 'Нояборь',
-    12: 'Декабрь',
-  }
-  let number = nameList[1];
-  if(nameList[1] < 10 ) {
-    const regExp = /\*|%|0|&|\$/g;
-    number = nameList[1].replace(regExp, '')
-  }
-  const starsnumber = document.querySelector('.reviews-forms-reqting').dataset.stars;
-  if (fullName != '' && shiftName != '' && description != '' && date != '') {
-    reviewsItems.insertAdjacentHTML(
-      'afterbegin',
-      `
-      <div id="${41}" class="reviews-item">
-        <div class="reviews-item-block df-align">
-            <div class="reviews-item-name _title-sub">${fullName}</div>
-            <div class="reviews-item-date">${number + " " + monthArry[number] + ' ' + nameList[0] + ' Года'}</div>
-        </div>
-        <div class="reviews-item-block df-align">
-            <div class="reviews-item-stars df-align">
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${starsnumber >= 1 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${starsnumber >= 2 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${starsnumber >= 3 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${starsnumber >= 4 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-                <div class="reviews-item-star">
-                    <svg width="28" height="26" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.54219 0.555559C9.96418 -0.185188 11.0359 -0.185187 11.4577 0.555568L14.1121 5.21535C14.2689 5.49072 14.5376 5.68514 14.849 5.74864L20.1187 6.82305C20.9564 6.99386 21.2876 8.00898 20.7106 8.63759L17.0815 12.592C16.867 12.8256 16.7643 13.1401 16.8 13.4548L17.4025 18.7786C17.4982 19.6249 16.6313 20.2523 15.8527 19.9001L10.9555 17.6842C10.6661 17.5533 10.334 17.5533 10.0446 17.6842L5.14729 19.9001C4.36873 20.2523 3.5018 19.6249 3.59756 18.7786L4.20006 13.4548C4.23562 13.1401 4.13306 12.8256 3.91857 12.592L0.289324 8.63759C-0.287552 8.00898 0.043597 6.99386 0.881273 6.82305L6.15099 5.74864C6.46233 5.68514 6.73102 5.49072 6.88787 5.21535L9.54219 0.555559Z" fill="#${starsnumber >= 5 ? 'E87000' : 'FADEC4'}"/>
-                        </svg>
-                        
-                </div>
-            </div>
-            <div class="reviews-item-title">${shiftName}</div>
-        </div>
-        <div class="reviews-item-text">
-        ${description}
-        </div>
-        <img onclick="openTextHeigth(this)" src="./img/reviews/text-bg.png" alt="Bg" class="reviews-item-text-bg">
-        <div class="reviews-item-text-bg-open">...</div>
-        <img src="./img/reviews/item-img.jpg" alt="${shiftName}" class="reviews-item-img">
-    </div>
-      `
-    );
-    let stars = document.querySelector('.reviews-forms-reqting');
-    stars.classList.remove(`reviews-forms-reqting-click-${starsView[stars.dataset.stars - 1]}`)
-    stars.dataset.stars = 0
-    e.target.reset();
-  }
-
-});
 
 //На телефонах У коментариев убирает дымок---------------------------------------------------
 function openTextHeigth(item) {

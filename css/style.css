@@ -2169,6 +2169,7 @@ body {
   }
   .team .events-views {
     margin-bottom: 50px;
+    overflow-x: auto;
   }
   .team-item-img {
     max-width: 370px;
@@ -2192,6 +2193,10 @@ body {
 }
 .reviews {
   padding: 60px 0 130px;
+}
+.reviews .container {
+  position: relative;
+  z-index: 1;
 }
 
 .reviews-title {
@@ -2499,16 +2504,6 @@ body {
   display: none;
 }
 
-.reviews-img-end {
-  width: 100%;
-  max-height: 796px;
-  height: 100%;
-}
-
-.reviews-img-end-two {
-  display: none;
-}
-
 .reviews-forms-input-box {
   position: relative;
   width: 100%;
@@ -2544,19 +2539,17 @@ input::-webkit-calendar-picker-indicator {
   .navigation-page-one {
     display: none;
   }
-  .reviews-img-end {
-    display: none;
-  }
-  .reviews-img-end-two {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    max-height: 1643px;
-    height: 100%;
-  }
   .reviews {
     padding: 50px 0 0;
+  }
+  .reviews .container {
+    padding: 0;
+  }
+  .reviews .reviews-row {
+    padding: 0 15px;
+  }
+  .reviews iframe {
+    margin-bottom: -2px;
   }
   .reviews-body {
     margin-bottom: 50px;
