@@ -2540,6 +2540,10 @@ input::-webkit-calendar-picker-indicator {
 }
 
 @media (max-width: 767px) {
+  .navigation-page-five,
+  .navigation-page-one {
+    display: none;
+  }
   .reviews-img-end {
     display: none;
   }

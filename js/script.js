@@ -72,18 +72,7 @@ function up() {
 	return false;
 }
 
-//Содание inputa с маской и выбор кода страны---------------------------------------
-const input = document.querySelector("#phone");
-window.intlTelInput(input, {
-    initialCountry: "auto",
-    geoIpLookup: callback => {
-        fetch("https://ipapi.co/json")
-        .then(res => res.json())
-        .then(data => callback(data.country_code))
-        .catch(() => callback("us"));
-    },
-  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.15/build/js/utils.js",
-});
+
 
 //-------------------------------------------------------------
 
@@ -128,11 +117,41 @@ document.addEventListener('click', function(e) {
 })
 
 
+//Зависемо телофн или пк показывает постраничную навигацию---------------------------------------------
+const parent = document.querySelector('.navigation-nav')
+let navOne = document.querySelector('.navigation-page-one')
+let navTwo = document.querySelector('.navigation-page-two')
+let navCenter = document.querySelector('.navigation-page-center')
+let navFour = document.querySelector('.navigation-page-four')
+let navFive = document.querySelector('.navigation-page-five')
+let navEnd = document.querySelector('.navigation-page-end')
+let typesMedia = 'true';
+function myFunction(x) {
+  if (x.matches) {
+    typesMedia = 'false'
+    parent.removeChild(navOne)
+    parent.removeChild(navFive)
+    navTwo.classList.add('navigation-page-active');
+    navTwo.dataset.pagenumber = 1;
+    navCenter.dataset.pagenumber = 2;
+    navFour.dataset.pagenumber = 3;
+    navEnd.dataset.pagenumber = 10;
 
+    navTwo.textContent='1'
+    navCenter.textContent='2'
+    navFour.textContent='3'
+    navEnd.textContent='10'
+  } else {
+    typesMedia = "true"
+  }
+}
+var x = window.matchMedia("(max-width: 767px)")
+myFunction(x)
+x.addListener(myFunction)
 
 //Получение масива json и дальнейший перенос в html---------------------------------------------
 let pageItems = document.querySelector('.reviews-items');
-const requestURL ="/Catafot/json/rewies.json"
+const requestURL ="../json/rewies.json"
 const request = new XMLHttpRequest();
 request.open("GET", requestURL);
 request.responseType = "json";
@@ -241,20 +260,21 @@ function pageUpdate(pageNumber) {
   }
 
   //Two-------------------------------------------
-  if(pageNumber.closest(".navigation-page-two") && 0 < pageNumberNum - 2 || pageNumber.closest(".navigation-page-two-min") && 0 < pageNumberNum - 1) {
+  if(pageNumber.closest(".navigation-page-two") && 0 < pageNumberNum - 2 || pageNumber.closest(".navigation-page-two-min") && 0 < pageNumberNum - 1 && typesMedia == 'false') {
     pageItems.dataset.page = pageNumberNum
     pageUpdateNav(pageNumberNum, 1, 1)
-  } else if (pageNumber.closest(".navigation-page-two") || pageNumber.closest(".navigation-page-two-min")) {
+  } else if (pageNumber.closest(".navigation-page-two") || pageNumber.closest(".navigation-page-two-min" && typesMedia == 'false')) {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
     addToReviewsCreate(pageItems, jsonArry)
   }
 
   //Four-Two-------------------------------------------
-  if(pageNumber.closest(".navigation-page-four") && maxPages > +pageNumberNum + 2 && maxPages != +pageNumberNum + 2 || pageNumber.closest(".navigation-page-four-min") && maxPages > +pageNumberNum + 1 && maxPages != +pageNumberNum + 1) {
+  if(pageNumber.closest(".navigation-page-four") && maxPages > +pageNumberNum + 2 && maxPages != +pageNumberNum + 2
+  || pageNumber.closest(".navigation-page-four-min") && maxPages > +pageNumberNum + 1 && maxPages != +pageNumberNum + 1 && typesMedia == 'false') {
     pageItems.dataset.page = pageNumberNum
     pageUpdateNav(pageNumberNum, 1, 2)
-  } else if (pageNumber.closest(".navigation-page-four-min")) {
+  } else if (pageNumber.closest(".navigation-page-four") || pageNumber.closest(".navigation-page-four-min") && typesMedia == 'false') {
     pageItems.dataset.page = pageNumberNum
     pageNumber.classList.add('navigation-page-active')
     addToReviewsCreate(pageItems, jsonArry)
@@ -275,15 +295,12 @@ function pageUpdate(pageNumber) {
 
   //End-Five-Four-Three-------------------------------------------
   if(pageNumber.closest(".navigation-page-end") && +pageEnd.dataset.pagenumber + 5 > maxPages && 0 == maxPages - pageEnd.dataset.pagenumber) {
-    console.log('1');
     pageItems.dataset.page = pageNumberNum
     pageUpdateNav(pageNumberNum, 2, 5)
   } else if(pageNumber.closest(".navigation-page-end") && +pageEnd.dataset.pagenumber + 5 > maxPages) {
-    console.log('2');
     pageItems.dataset.page = pageNumberNum
     pageUpdateNav(pageNumberNum, 1, 4)
   } else if (pageNumber.closest(".navigation-page-end")) {
-    console.log('3');
     pageItems.dataset.page = pageNumberNum
     pageUpdateNav(pageNumberNum, 2, 3)
   }
@@ -311,12 +328,13 @@ function pageUpdateNav(page, number, type) {
       element.textContent=`${element.dataset.pagenumber}`
     }
 
-    if(type == 2 && maxPages <= +page + number + 4 && !element.closest('.navigation-page-end')) {
+    if(type == 2 && maxPages >= +page + number + 4 && !element.closest('.navigation-page-end')) {
       element.dataset.pagenumber = +pageElement + number;
       element.textContent=`${element.dataset.pagenumber}`
+      console.log(+page + number + 4);
     } else if (type == 2) {
-      dataActive.classList.add('navigation-page-active')
       let pageEndElement = document.querySelector('.navigation-page-end')
+      dataActive.classList.add('navigation-page-active')
       if(element.closest('.navigation-page-end') && maxPages > pageEndElement.dataset.pagenumber) {
         element.dataset.pagenumber = +pageElement + number;
         element.textContent=`${element.dataset.pagenumber}`
@@ -326,7 +344,24 @@ function pageUpdateNav(page, number, type) {
       }
     }
 
-     if (type == 3 && page != pageElement) {
+    if(type == 3 && page != pageElement && typesMedia == 'false') {
+      if(element.closest(".navigation-page-two-min")) {
+        element.dataset.pagenumber = page - 2;
+        element.textContent=`${element.dataset.pagenumber}`
+      }
+      if(element.closest(".navigation-page-center")) {
+        element.dataset.pagenumber = page - 1;
+        element.textContent=`${element.dataset.pagenumber}`
+      }
+      if(element.closest(".navigation-page-four-min")) {
+        element.dataset.pagenumber = page;
+        element.textContent=`${element.dataset.pagenumber}`
+        element.classList.add('navigation-page-active')
+      }
+    }else if (type == 3 && typesMedia == 'false') {
+      element.dataset.pagenumber = +page + 5;
+      element.textContent=`${element.dataset.pagenumber}`
+    } else if (type == 3 && page != pageElement) {
       if(element.closest(".navigation-page-one")) {
         element.dataset.pagenumber = page - 2;
         element.textContent=`${element.dataset.pagenumber}`
@@ -353,16 +388,35 @@ function pageUpdateNav(page, number, type) {
       pageCenter.classList.add('navigation-page-active')
     }
 
-    if(type == 4 && page != pageElement){
+    if (type == 4 && page != pageElement && +page + 2 >= maxPages && typesMedia == 'false') {
+      if(element.closest(".navigation-page-two-min")) {
+        element.dataset.pagenumber = page - 2;
+        element.textContent=`${element.dataset.pagenumber}`
+      }
+      if(element.closest(".navigation-page-center")) {
+        element.dataset.pagenumber = page - 1;
+        element.textContent=`${element.dataset.pagenumber}`
+      }
+      if(element.closest(".navigation-page-four-min")) {
+        element.dataset.pagenumber = page;
+        element.textContent=`${element.dataset.pagenumber}`
+        element.classList.add('navigation-page-active')
+      }
+    } else if (type == 4 && typesMedia == 'false') {
+      element.dataset.pagenumber = +page + (maxPages - page);
+      element.textContent=`${element.dataset.pagenumber}`
+    } else if(type == 4 && page != pageElement){
       element.dataset.pagenumber = +pageElement + number;
       element.textContent=`${element.dataset.pagenumber}`
     } else if (type == 4) {
-      const dataActiveEl = document.querySelector('.navigation-page[data-pagenumber="'+page+'"]');
+      const dataActiveEl = document.querySelector(`.navigation-page[data-pagenumber="${page}"]`);
       dataActiveEl.classList.add('navigation-page-active')
+      console.log(page);
       element.dataset.pagenumber = +pageElement + (maxPages - page);
       element.textContent=`${element.dataset.pagenumber}`
     }
-    if(type == 5 && page != pageElement && pageEndTwo.closest('.navigation-page-end-min')) {
+
+    if(type == 5 && page != pageElement && typesMedia == 'false') {
       if(element.closest(".navigation-page-two-min")) {
         element.dataset.pagenumber = page - 3;
         element.textContent=`${element.dataset.pagenumber}`
@@ -407,13 +461,13 @@ function pagePrev() {
   const pageActive = document.querySelector(".navigation-page-active");
   const jsonArry = request.response;
   if (pageOne && pageOne.closest('.navigation-page-active') && pageOne.dataset.pagenumber != 1 ||
-    pageTwo && pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1) {
+     pageTwo && pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1 && typesMedia == 'false')  {
       const pageNumberNum = pageActive.dataset.pagenumber;
       const pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${pageNumberNum}"]`);
       pageItems.dataset.page = pagePrevActive.dataset.pagenumber;
       pageUpdateNav(pagePrevActive.dataset.pagenumber, 1, 11)
   } else if(pageOne && pageOne.dataset.pagenumber == 1 && !pageOne.closest('.navigation-page-active') ||
-    pageTwo && pageTwo.dataset.pagenumber == 1 && !pageTwo.closest('.navigation-page-active')) {
+    pageTwo && pageTwo.dataset.pagenumber == 1 && !pageTwo.closest('.navigation-page-active') && typesMedia == 'false') {
       pageActive.classList.remove('navigation-page-active')
       const pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${pageActive.dataset.pagenumber - 1}"]`);
       const pageNumberNum = pagePrevActive.dataset.pagenumber
@@ -421,11 +475,13 @@ function pagePrev() {
       pagePrevActive.classList.add('navigation-page-active')
       addToReviewsCreate(pageItems, jsonArry)
   } else if (pageOne && !pageOne.closest('.navigation-page-active') && pageOne.dataset.pagenumber != 1 ||
-    pageTwo && !pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1) {
-      const pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${pageActive.dataset.pagenumber - 1}"]`);
-      const pageNumberNum = pagePrevActive.dataset.pagenumber
-      pageItems.dataset.page = pageNumberNum
-      pageUpdateNav(pageNumberNum, 1, 1)
+    pageTwo && !pageTwo.closest('.navigation-page-active') && pageTwo.dataset.pagenumber != 1 && typesMedia == 'false') {
+      if(pageActive.dataset.pagenumber - 1 > 0) {
+        const pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${pageActive.dataset.pagenumber - 1}"]`);
+        const pageNumberNum = pagePrevActive.dataset.pagenumber
+        pageItems.dataset.page = pageNumberNum
+        pageUpdateNav(pageNumberNum, 1, 1)
+      }
   }
 
 }
@@ -443,7 +499,7 @@ function pageNext() {
     pageUpdateNav(pagePrevActive.dataset.pagenumber, 1, 22)
   } 
   if(pageFive && +pageFive.dataset.pagenumber + 1 == maxPages && !pageEndClick.closest('.navigation-page-active') ||
-    pageFour && +pageFour.dataset.pagenumber + 1 == maxPages && !pageEndClick.closest('.navigation-page-active')) {
+    pageFour && +pageFour.dataset.pagenumber + 1 == maxPages && !pageEndClick.closest('.navigation-page-active') && typesMedia == 'false') {
       pageActive.classList.remove('navigation-page-active')
       let pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${+pageActive.dataset.pagenumber + 1}"]`);
       let pageNumberNum = pagePrevActive.dataset.pagenumber
@@ -451,11 +507,13 @@ function pageNext() {
       pagePrevActive.classList.add('navigation-page-active')
       addToReviewsCreate(pageItems, jsonArry)
   } else if (pageFive && !pageEndClick.closest('.navigation-page-active') && +pageFive.dataset.pagenumber + 1 != maxPages ||
-    pageFour && !pageEndClick.closest('.navigation-page-active') && +pageFour.dataset.pagenumber + 1 != maxPages ) {
-      let pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${+pageActive.dataset.pagenumber + 1}"]`);
-      let pageNumberNum = pagePrevActive.dataset.pagenumber
-      pageItems.dataset.page = pageNumberNum
-      pageUpdateNav(pageNumberNum, 1, 2)
+    pageFour && !pageEndClick.closest('.navigation-page-active') && +pageFour.dataset.pagenumber + 1 != maxPages && typesMedia == 'false') {
+      if(+pageActive.dataset.pagenumber + 1 < maxPages) {
+        let pagePrevActive = document.querySelector(`.navigation-page[data-pagenumber="${+pageActive.dataset.pagenumber + 1}"]`);
+        let pageNumberNum = pagePrevActive.dataset.pagenumber
+        pageItems.dataset.page = pageNumberNum
+        pageUpdateNav(pageNumberNum, 1, 2)
+      }
   }
 }
 //-----------------------------------------------------------------------------------------------------------
@@ -557,19 +615,3 @@ formElement.addEventListener('submit', (e) => {
 function openTextHeigth(item) {
   let items = item.closest('.reviews-item').classList.add("reviews-item-active-text");
 }
-
-//Зависемо телофн или пк показывает постраничную навигацию---------------------------------------------
-let navigationBig = document.querySelector('.navigation-big')
-let navigationMin = document.querySelector('.navigation-min')
-const parent = document.querySelector('.reviews-navigation-container')
-function myFunction(x) {
-  if (x.matches) {
-    parent.removeChild(navigationBig)
-  } else {
-    parent.removeChild(navigationMin)
-  }
-}
-var x = window.matchMedia("(max-width: 767px)")
-myFunction(x)
-x.addListener(myFunction)
-
