@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mary's simple recipe for maple bacon donuts makes a sticky, sweet treat with just a hint of salt that you'll keep coming back for.">
     <link rel="stylesheet" href="./css/intlTelInput.min.css">
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
@@ -258,6 +259,19 @@
                                 <div data-id="one" class="events-view events-view-active ">Администрация</div>
                                 <div data-id="two" class="events-view">Вожатые</div>
                                 <div data-id="three" class="events-view">Инструкторы</div>
+                            </div>
+                            <div class="events-views-swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div data-id="one" class="events-view events-view-active ">Администрация</div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div data-id="two" class="events-view">Вожатые</div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div data-id="three" class="events-view">Инструкторы</div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="events-items-container">
@@ -535,10 +549,14 @@
             
         </footer>
     </div>
-
+    <script src="./js/swiper-bundle.min.js"></script>
     <script src="./js/intlTelInput.min.js"></script>
     <script src="./js/script.js"></script>
     <script>
+        const swiperViews = new Swiper('.events-views-swiper', {
+            slidesPerView: 'auto',
+            spaceBetween: 15
+        });
         //Содание inputa с маской и выбор кода страны---------------------------------------
         const input = document.querySelector("#phone");
         window.intlTelInput(input, {

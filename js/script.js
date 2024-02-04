@@ -16,8 +16,19 @@ document.addEventListener('click', function(e) {
     }
 
     //Переключение между блоками events-view---------------------------------------
-    if(e.target.closest('.events-view')) {
-      let event = document.querySelector('.events-view-active')
+    if(e.target.closest('.events-view') && e.target.closest('.events-views') && !e.target.closest('.events-view-active')) {
+      let viewContainer = document.querySelector('.events-views');
+      let event = viewContainer.querySelector('.events-view-active')
+      let eventItem = document.querySelector('.events-items-active')
+      let dataJSValue = e.target.getAttribute('data-id');
+      let dataItem = document.getElementById(`${dataJSValue}`);
+      e.target.classList.add('events-view-active')
+      dataItem.classList.add('events-items-active')
+      eventItem.classList.remove('events-items-active')
+      event.classList.remove('events-view-active')
+    } else if (e.target.closest('.events-view') && e.target.closest('.events-views-swiper') && !e.target.closest('.events-view-active')) {
+      let viewContainer = document.querySelector('.events-views-swiper');
+      let event = viewContainer.querySelector('.events-view-active')
       let eventItem = document.querySelector('.events-items-active')
       let dataJSValue = e.target.getAttribute('data-id');
       let dataItem = document.getElementById(`${dataJSValue}`);
@@ -47,6 +58,7 @@ document.addEventListener('click', function(e) {
     }
 
 })
+
 //Поевление обект при скроле вниз-----------------------------------------------
 window.onscroll = function(){
   const html = document.documentElement, body = document.body;
@@ -149,11 +161,8 @@ var x = window.matchMedia("(max-width: 767px)")
 myFunction(x)
 x.addListener(myFunction)
 
-//Получение масива json и дальнейший перенос в html---------------------------------------------
-let pageItems = document.querySelector('.reviews-items');
-let reviewsItems = document.querySelector('.reviews-items')
-
 //Создание Нумерованой погинации------------------------------------------------------------------------
+let pageItems = document.querySelector('.reviews-items');
 const pageNavLinks = document.querySelectorAll('.navigation-page');
 let pageEnd = document.querySelector('.navigation-page-end')
 let pageEndTwo = document.querySelector('.navigation-page-end-min')

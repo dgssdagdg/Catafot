@@ -2153,6 +2153,15 @@ body {
   font-weight: 900;
 }
 
+.events-views-swiper {
+  width: 100%;
+  display: none;
+  margin-bottom: 50px;
+}
+.events-views-swiper .swiper-slide {
+  width: auto !important;
+}
+
 @media (max-width: 997px) {
   .team-item {
     -ms-flex-wrap: wrap;
@@ -2161,6 +2170,11 @@ body {
   }
 }
 @media (max-width: 767px) {
+  .events-views-swiper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   .team {
     padding: 50px 0;
   }
@@ -2169,7 +2183,7 @@ body {
   }
   .team .events-views {
     margin-bottom: 50px;
-    overflow-x: auto;
+    display: none;
   }
   .team-item-img {
     max-width: 370px;
