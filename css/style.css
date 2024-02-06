@@ -2565,6 +2565,12 @@ input::-webkit-calendar-picker-indicator {
   .reviews iframe {
     margin-bottom: -2px;
   }
+  .reviews iframe p {
+    font: 15px/20px "Formular", arial, sans-serif !important;
+  }
+  .t-rich-text__p {
+    font: 12px/20px "Formular", arial, sans-serif !important;
+  }
   .reviews-body {
     margin-bottom: 50px;
   }
