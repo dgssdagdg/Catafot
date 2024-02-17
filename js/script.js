@@ -162,7 +162,7 @@ myFunction(x)
 x.addListener(myFunction)
 
 //Создание Нумерованой погинации------------------------------------------------------------------------
-let pageItems = document.querySelector('.reviews-items');
+let pageItems = document.querySelector('.navigation-items-block');
 const pageNavLinks = document.querySelectorAll('.navigation-page');
 let pageEnd = document.querySelector('.navigation-page-end')
 let pageEndTwo = document.querySelector('.navigation-page-end-min')

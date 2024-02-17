@@ -317,7 +317,7 @@
                             
                         </form>
                         <div class="reviews-body df-align">
-                            <div data-page="1" class="reviews-items">
+                            <div data-page="1" class="reviews-items navigation-items-block">
                                 <div id="1" class="reviews-item">
                                     <div class="reviews-item-block df-align">
                                         <div class="reviews-item-name _title-sub">Яна Вячеславовна</div>
@@ -618,7 +618,6 @@
         </footer>
     </div>
     <script src="./js/intlTelInput.min.js"></script>
-    <script src="./js/script.js"></script>
     <script>
         //Содание inputa с маской и выбор кода страны---------------------------------------
         const input = document.querySelector("#phone");
@@ -636,6 +635,7 @@
         //Создание Коментария-----------------------------------------------------------
         const formElement = document.getElementById('form1');
         const formElements = document.querySelectorAll('.form-cheked')
+        let reviewsItems = document.querySelector('.reviews-items');
         formElement.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(formElement);
@@ -726,5 +726,6 @@
 
         });
     </script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

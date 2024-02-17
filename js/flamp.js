@@ -1,6 +1,5 @@
 (function (d, w) {
 	'use strict';
-
 	// Do not change! It will be replaced with regexp.
 	var DOMAIN = 'flamp.ru';
 
@@ -165,6 +164,7 @@
 		}
 
 		if (!(DOMAIN_REGEXP.test(el.getAttribute('href')))) {
+			console.log(el.getAttribute('href'));
 			el.parentNode.removeChild(el);
 			throw new Error('Wrong href value');
 		}
